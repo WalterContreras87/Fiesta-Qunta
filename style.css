@@ -73,8 +73,12 @@ body {
 
 .beneficios-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* aca lo dejamos como dos columnas por lado */
     gap: 25px;
+    /* Media Query para pantallas pequeñas */
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr; /* Vuelve a una sola columna en móviles */
+    }
 }
 
 .card {
@@ -86,12 +90,13 @@ body {
 }
 
     .card i {
-        font-size: 2.5em;
+        font-size: 3.5em; /* aca aumentamos el tamaño de los iconos */
         color: #1e90ff;
         margin-bottom: 15px;
     }
 
     .card h4 {
+        font-size: 1.5em; /* agregamos tamaño fuente para poder cambiarlo*/
         margin-bottom: 10px;
         color: #fff;
     }
@@ -121,6 +126,7 @@ body {
     .formulario-registro h3 {
         margin-bottom: 20px;
         color: #fff;
+        font-size: 1.3em; /* ajusté el tamaño de la fuente para las etiquetas */
     }
 
     .formulario-registro form {
@@ -133,6 +139,7 @@ body {
     .formulario-registro label {
         font-weight: 700;
         color: #8b949e;
+        font-size: 1.1em; /* ajusté el tamaño de la fuente para las etiquetas */
     }
 
     .formulario-registro input {
@@ -141,6 +148,7 @@ body {
         color: #e6edf3;
         padding: 10px;
         border-radius: 6px;
+        font-size: 1.1em; /* ajusté el tamaño de la fuente para los campos de entrada */
     }
 
     .formulario-registro button {
