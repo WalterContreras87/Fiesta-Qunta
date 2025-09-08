@@ -3,9 +3,9 @@
 // Datos de conexión a la base de datos.
 // En un entorno de desarrollo local como XAMPP, el usuario suele ser 'root' y la contraseña está vacía.
 $servername = "localhost"; 
-$username = "ptw44ffr_fiestaquinta"; 
-$password = "Bl@ckfire1"; 
-$dbname = "fiestaquinta_db"; 
+$username = "ptw44ffr_fiestaquinta2"; 
+$password = "Emmit@cpanel2021"; 
+$dbname = "ptw44ffr_fiestaquinta_db"; 
 
 // Intentar la conexión a la base de datos usando PDO para mayor seguridad.
 try {
