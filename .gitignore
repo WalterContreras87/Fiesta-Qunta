@@ -1,5 +1,5 @@
 # Ignorar archivos temporales y de compilación de Visual Studio
-.env/
+.env
 .vs/
 bin/
 obj/
