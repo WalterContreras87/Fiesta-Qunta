@@ -2,7 +2,7 @@
 
 // Reemplaza esto con tu Clave Secreta de reCAPTCHA.
 // Por favor, verifica que no haya espacios al principio o al final.
-define('SECRET_KEY', '6Lc1Y8MrAAAAAEXnPSS78bTTP0BojTajlBZIfSSl');
+define('SECRET_KEY', 'clave secreta');
 
 // Datos de conexión a la base de datos.
 $servername = "localhost";
