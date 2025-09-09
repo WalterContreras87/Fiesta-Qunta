@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-    <!-- HERO -->
     <div class="hero-header">
         <img src="fiestaquinta_logo_original_paleta.png" alt="Logo Fiesta Quinta" class="hero-logo-img">
         <h1 class="main-logo-text">FiestaQuinta.cl</h1>
@@ -20,7 +20,6 @@
         <a href="#registro" class="btn-cta">Quiero registrar mi banda</a>
     </div>
 
-    <!-- BENEFICIOS -->
     <section class="beneficios">
         <h3>¿Por qué unirte a Fiesta Quinta?</h3>
         <div class="beneficios-grid">
@@ -47,7 +46,6 @@
         </div>
     </section>
 
-    <!-- FORMULARIO -->
     <section class="formulario-registro" id="registro">
         <h3>Regístrate y recibe novedades</h3>
         <form action="procesar_registro.php" method="post">
@@ -60,6 +58,8 @@
             <label for="banda">Nombre de tu banda/orquesta</label>
             <input type="text" id="banda" name="banda" placeholder="Nombre de tu banda" required>
 
+            <div class="g-recaptcha" data-sitekey="6Lc1Y8MrAAAAAKQSg90kytBcVL1arwz0Z1qxuh0U"></div>
+
             <button type="submit">Regístrate ahora</button>
         </form>
     </section>
@@ -67,7 +67,5 @@
     <footer>
         &copy; 2025 FiestaQuinta.cl - Todos los derechos reservados.
     </footer>
-
 </body>
 </html>
-
