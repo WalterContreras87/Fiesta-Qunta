@@ -1,3 +1,16 @@
+<?php
+// --- INICIO: Cargar variables de entorno desde .env ---
+$env_vars = [];
+if (file_exists(__DIR__ . '/.env')) {
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue;
+        list($key, $value) = explode('=', $line, 2);
+        $env_vars[trim($key)] = trim($value);
+    }
+}
+// --- FIN: Cargar variables de entorno ---
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,46 +34,46 @@
     </div>
 
     <section class="beneficios">
-        <h3>Â¿Por quÃ© unirte a Fiesta Quinta?</h3>
+        <h3>¿Por qué unirte a Fiesta Quinta?</h3>
         <div class="beneficios-grid">
             <div class="card">
                 <i class="fas fa-calendar-alt"></i>
-                <h4>Consigue mÃ¡s shows</h4>
+                <h4>Consigue más shows</h4>
                 <p>Conecta con eventos y aumenta tus oportunidades.</p>
             </div>
             <div class="card">
                 <i class="fas fa-bullhorn"></i>
-                <h4>Promociona tu mÃºsica</h4>
-                <p>Haz que mÃ¡s gente conozca tu sonido.</p>
+                <h4>Promociona tu música</h4>
+                <p>Haz que más gente conozca tu sonido.</p>
             </div>
             <div class="card">
                 <i class="fas fa-handshake"></i>
                 <h4>Gestiona tu negocio</h4>
-                <p>Organiza contratos y fechas fÃ¡cilmente.</p>
+                <p>Organiza contratos y fechas fácilmente.</p>
             </div>
             <div class="card">
                 <i class="fas fa-mobile-alt"></i>
                 <h4>Todo en un solo lugar</h4>
-                <p>Administra tu banda de forma simple y rÃ¡pida.</p>
+                <p>Administra tu banda de forma simple y rápida.</p>
             </div>
         </div>
     </section>
 
     <section class="formulario-registro" id="registro">
-        <h3>RegÃ­strate y recibe novedades</h3>
+        <h3>Regístrate y recibe novedades</h3>
         <form action="procesar_registro.php" method="post">
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
 
-            <label for="email">Correo ElectrÃ³nico</label>
+            <label for="email">Correo Electrónico</label>
             <input type="email" id="email" name="email" placeholder="nombre@ejemplo.com" required>
 
             <label for="banda">Nombre de tu banda/orquesta</label>
             <input type="text" id="banda" name="banda" placeholder="Nombre de tu banda" required>
 
-            <div class="g-recaptcha" data-sitekey="6Lc1Y8MrAAAAAKQSg90kytBcVL1arwz0Z1qxuh0U"></div>
+            <div class="g-recaptcha" data-sitekey="<?php echo $env_vars['RECAPTCHA_SITE_KEY'] ?? ''; ?>"></div>
 
-            <button type="submit">RegÃ­strate ahora</button>
+            <button type="submit">Regístrate ahora</button>
         </form>
     </section>
 

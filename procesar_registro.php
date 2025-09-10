@@ -1,14 +1,30 @@
 <?php
 
-// Reemplaza esto con tu Clave Secreta de reCAPTCHA.
-// Por favor, verifica que no haya espacios al principio o al final.
-define('SECRET_KEY', 'clave secreta');
+// --- INICIO: Cargar variables de entorno desde .env ---
+// Esta parte lee el archivo .env y carga su contenido en un array.
+$env_vars = [];
+if (file_exists(__DIR__ . '/.env')) {
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue; // Ignora comentarios
+        list($key, $value) = explode('=', $line, 2);
+        $env_vars[trim($key)] = trim($value);
+    }
+}
+// --- FIN: Cargar variables de entorno ---
+
+// 1. Acceder a las claves de reCAPTCHA y la base de datos
+// Usa las variables de entorno para obtener los datos
+$recaptcha_secret_key = $env_vars['RECAPTCHA_SECRET_KEY'] ?? '';
+$db_username = $env_vars['DB_USERNAME'] ?? '';
+$db_password = $env_vars['DB_PASSWORD'] ?? '';
+$db_name = $env_vars['DB_NAME'] ?? '';
 
 // Datos de conexión a la base de datos.
 $servername = "localhost";
-$username = "ptw44ffr_fiestaquinta2";
-$password = "Emmit@cpanel2021";
-$dbname = "ptw44ffr_fiestaquinta_db";
+$username = $db_username;
+$password = $db_password;
+$dbname = $db_name;
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -25,7 +41,7 @@ try {
             curl_setopt($curl, CURLOPT_URL, $verify_url);
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query([
-                'secret' => SECRET_KEY,
+                'secret' => $recaptcha_secret_key,
                 'response' => $captcha_response
             ]));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -55,15 +71,16 @@ try {
         $stmt->execute();
 
         // Código de la notificación por email
-        $to = 'tu_correo@tudominio.cl';
+        // El correo de destino también debería ir en el .env
+        $to = $env_vars['MAIL_TO'] ?? 'tu_correo@tudominio.cl';
         $subject = '¡Nuevo registro de banda en FiestaQuinta!';
         $message = "Se ha registrado una nueva banda:\n\n";
         $message .= "Nombre del contacto: " . $nombre . "\n";
         $message .= "Correo electrónico: " . $email . "\n";
         $message .= "Nombre de la banda: " . $nombre_banda . "\n";
         $headers = 'From: contacto@fiestaquinta.cl' . "\r\n" .
-                   'Reply-To: ' . $email . "\r\n" .
-                   'X-Mailer: PHP/' . phpversion();
+                    'Reply-To: ' . $email . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
         mail($to, $subject, $message, $headers);
 
         header("Location: gracias.html");
